@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter_chopper_sample/data/mobile_data_interceptor.dart';
 
 part 'post_api_service.chopper.dart';
 
@@ -25,7 +26,23 @@ abstract class PostApiService extends ChopperService {
       converter: JsonConverter(),
       interceptors: [
         HeadersInterceptor({'Cache-Control': 'no-cache'}), // Headerをつけられる
-        HttpLoggingInterceptor(), // Chopperのログを出力する際につける
+        // HttpLoggingInterceptor(), // Chopperのログを出力する際につける
+        CurlInterceptor(), // Curlコマンドのみ出力する
+        // 特別なログを出す場合
+        // 無名関数で書くか、クラス化する
+        (Request request) async {
+          if (request.method == HttpMethod.Post) {
+            chopperLogger.info('Performed a POST request');
+          }
+          return request;
+        },
+        (Response response) async {
+          if (response.statusCode == 404) {
+            chopperLogger.severe('404 NOT FOUND');
+          }
+          return response;
+        },
+        MobileDataInterceptor(),
       ],
     );
     return _$PostApiService(client);
