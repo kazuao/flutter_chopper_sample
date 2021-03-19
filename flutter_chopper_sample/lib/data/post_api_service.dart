@@ -23,6 +23,10 @@ abstract class PostApiService extends ChopperService {
         _$PostApiService(),
       ],
       converter: JsonConverter(),
+      interceptors: [
+        HeadersInterceptor({'Cache-Control': 'no-cache'}), // Headerをつけられる
+        HttpLoggingInterceptor(), // Chopperのログを出力する際につける
+      ],
     );
     return _$PostApiService(client);
   }
