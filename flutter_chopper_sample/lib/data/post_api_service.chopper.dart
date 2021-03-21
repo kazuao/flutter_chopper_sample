@@ -12,24 +12,28 @@ class _$PostApiService extends PostApiService {
     this.client = client;
   }
 
+  @override
   final definitionType = PostApiService;
 
-  Future<Response> getPosts() {
+  @override
+  Future<Response<BuiltList<BuiltPost>>> getPosts() {
     final $url = '/posts';
     final $request = Request('GET', $url, client.baseUrl);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<BuiltList<BuiltPost>, BuiltPost>($request);
   }
 
-  Future<Response> getPost(int id) {
-    final $url = '/posts/${id}';
+  @override
+  Future<Response<BuiltPost>> getPost(int id) {
+    final $url = '/posts/$id';
     final $request = Request('GET', $url, client.baseUrl);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<BuiltPost, BuiltPost>($request);
   }
 
-  Future<Response> postPost(Map<String, dynamic> body) {
+  @override
+  Future<Response<BuiltPost>> postPost(BuiltPost body) {
     final $url = '/posts';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<BuiltPost, BuiltPost>($request);
   }
 }
