@@ -1,6 +1,7 @@
-import 'package:chopper/chopper.dart';
-import '../model/serializers.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:chopper/chopper.dart';
+
+import '../model/serializers.dart';
 
 class BuiltValueConverter extends JsonConverter {
   @override

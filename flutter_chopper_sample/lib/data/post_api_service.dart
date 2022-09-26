@@ -1,5 +1,5 @@
 import 'package:chopper/chopper.dart';
-import 'package:flutter_chopper_sample/data/mobile_data_interceptor.dart';
+import 'mobile_data_interceptor.dart';
 import 'package:built_collection/built_collection.dart';
 
 import '../model/built_post.dart';
@@ -9,12 +9,14 @@ part 'post_api_service.chopper.dart';
 
 @ChopperApi(baseUrl: '/posts')
 abstract class PostApiService extends ChopperService {
+  //抽象化
   // Headerを追加する場合1: @Get({'Content-Type': 'json'})
   @Get()
   Future<Response<BuiltList<BuiltPost>>> getPosts();
 
   @Get(path: '/{id}')
   Future<Response<BuiltPost>> getPost(@Path('id') int id);
+  // pathと@pathがつながる
 
   @Post()
   Future<Response<BuiltPost>> postPost(

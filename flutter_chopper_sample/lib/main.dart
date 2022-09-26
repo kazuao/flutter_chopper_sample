@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chopper_sample/data/post_api_service.dart';
+import 'data/post_api_service.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
